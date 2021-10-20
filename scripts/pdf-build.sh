@@ -31,7 +31,7 @@ setup_pytools()
         OPTIONS="--editable"
     fi
 
-    ${PIP} install --upgrade --prefix=${PDF_HOME} ${OPTIONS} .
+    ${PIP} install --upgrade --use-feature=in-tree-build --prefix=${PDF_HOME} ${OPTIONS} .
 }
 
 

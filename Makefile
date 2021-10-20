@@ -1,4 +1,4 @@
-PACKAGE=hiracchi/proteindf-dev
+PACKAGE=hiracchi/docker-proteindf-dev
 TAG=latest
 CONTAINER_NAME=proteindf-dev
 
@@ -26,6 +26,18 @@ restart: stop start
 
 term:
 	docker exec -it ${CONTAINER_NAME} /bin/bash
+
+
+debug:
+	@\$(eval USER_ID := $(shell id -u))
+	@\$(eval GROUP_ID := $(shell id -g))
+	@echo "start docker as ${USER_ID}:${GROUP_ID}"
+	docker run -it \
+		--rm \
+		--name ${CONTAINER_NAME} \
+		-u $(USER_ID):$(GROUP_ID) \
+		--volume ${PWD}:/work \
+		"${PACKAGE}:${TAG}" /bin/bash
 
 
 logs:
